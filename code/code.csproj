@@ -99,7 +99,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\address.cs" />
-    <Compile Include="Models\cart.cs" />
     <Compile Include="Models\customer.cs" />
     <Compile Include="Models\DBcontext.cs" />
     <Compile Include="Models\item.cs" />

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity.Core;
+using System.ComponentModel.DataAnnotations;
 
 namespace code.Models
 {
@@ -9,12 +11,11 @@ namespace code.Models
     {
         public customer()
         {
-            this.carts = new HashSet<cart>();
             this.orders = new HashSet<order>();
             this.paymentOptions = new HashSet<paymentOption>();
             this.addresses = new HashSet<address>();
         }
-
+        [Key]
         public int customerID { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }

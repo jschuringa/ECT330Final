@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity.Core;
+using System.ComponentModel.DataAnnotations;
 
 namespace code.Models
 {
@@ -13,6 +15,7 @@ namespace code.Models
         }
 
         public int customerID { get; set; }
+        [Key]
         public int custPayOptID { get; set; }
         public int cardNumber { get; set; }
         public string expDate { get; set; }

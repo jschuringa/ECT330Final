@@ -16,7 +16,6 @@ namespace code.Models
 
         public virtual DbSet<address> addresses { get; set; }
         public virtual DbSet<item> items { get; set; }
-        public virtual DbSet<cart> carts { get; set; }
         public virtual DbSet<customer> customers { get; set; }
         public virtual DbSet<order> orders { get; set; }
         public virtual DbSet<paymentOption> paymentOptions { get; set; }
