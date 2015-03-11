@@ -1,0 +1,19 @@
+{
+  "name": "ECT330-Snowmazon",
+  "version": "0.0.1",
+  "description": "Sells amazing snow!",
+  "main": "node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:lschpmn/ECT330Final.git"
+  },
+  "author": "Luis Chapman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lschpmn/ECT330Final/issues"
+  },
+  "homepage": "https://github.com/lschpmn/ECT330Final"
+}
