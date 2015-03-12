@@ -3,10 +3,15 @@
 var snow = angular.module("snow",['ngRoute']);
 
 snow.config(['$routeProvider',function($routeProvider){
+    var root = '/resources/angular/files';
+
     $routeProvider.when('/',{
-        templateUrl:'/resources/angular/files/landing/landing.html',
+        templateUrl:root + '/landing/landing.html',
         controller:'landingCtrl'
     }).when('/information',{
-        templateUrl:'/resources/angular/files/information/information.html'
+        templateUrl:root + '/information/information.html'
+    }).when('/login',{
+        templateUrl:root + '/login/login.html',
+        controller:'loginCtrl'
     }).otherwise('/');
 }]);
