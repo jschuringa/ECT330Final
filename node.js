@@ -11,6 +11,11 @@ app.use(function(req,res,next){
     next();
 });
 
+//fake http calls used until real backend is up
+app.post('/login',function(req,res){
+    res.send(200).end();
+});
+
 app.use(express.static(__dirname + '/code'));
 
 //starts server on port 5000
