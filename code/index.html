@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="snow">
 <head lang="en">
     <meta charset="UTF-8">
     <title>SNOWMAZON</title>
@@ -10,6 +10,17 @@
 </head>
 <body>
 
+<div class="container-fluid">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            SNOWMAZON
+        </div>
+
+        <div class="panel-body">
+            <div ng-view></div>
+        </div>
+    </div>
+</div>
 
 <!--Jquery-->
 <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -18,4 +29,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.js"></script>
 <!--Bootstrap JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script></body>
+
+<!--My Files-->
+<script src="snow.min.js"></script>
 </html>
