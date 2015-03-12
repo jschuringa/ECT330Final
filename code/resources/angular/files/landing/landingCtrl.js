@@ -15,7 +15,17 @@ snow.controller('landingCtrl',['$http','$scope','$window',function($http,$scope,
     };
 
     $scope.get = function(chosen){
-        console.log(chosen);
+        $http.post('/shoppingCart',chosen).then(function(){
+            //successfully added
+            $scope.close();
+            //TODO Add shopping cart functionality;
+        }).catch(function(err){
+            if(err.status){
+                $window.alert('Couldn\'t reach the server. Please try again');
+            }else{
+                $window.alert('Something went wrong while trying to add item to your shopping cart. Please try again');
+            }
+        });
     };
     
     $http.get('/testItems').then(function(success){

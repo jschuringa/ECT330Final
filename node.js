@@ -58,8 +58,11 @@ app.get('/testItems',function(req,res){
         }
     }
 
-    res.send(200,fakeItems).end();
+    res.status(200).send(fakeItems);
+});
 
+app.post('/shoppingCart',function(req,res){
+    res.send(200).end();
 });
 
 app.use(express.static(__dirname + '/code'));
