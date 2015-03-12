@@ -4,7 +4,9 @@
   "description": "Sells amazing snow!",
   "main": "node.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall":"gulp compile",
+    "gulp":"gulp"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/lschpmn/ECT330Final/issues"
   },
-  "homepage": "https://github.com/lschpmn/ECT330Final"
+  "homepage": "https://github.com/lschpmn/ECT330Final",
+  "dependencies": {
+    "express": "^4.12.2",
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
+    "gulp-uglifyjs": "^0.6.1"
+  }
 }
