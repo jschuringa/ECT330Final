@@ -1,3 +1,9 @@
-<h1>Test</h1>
+<h1>Our Snow</h1>
 
-<h1>{{test}}</h1>
+<div class="col-md-3" ng-repeat="item in items" highlight-dir>
+    <h3>{{ item.title }}</h3>
+
+    <p>Price: {{item.price | currency}}</p>
+
+    <p>Quantity: {{item.quantity}}</p>
+</div>

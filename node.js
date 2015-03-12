@@ -19,27 +19,27 @@ app.post('/login',function(req,res){
 app.get('/testItems',function(req,res){
     var fakeItems = [
         {
-            item:'Slush'
+            title:'Slush'
         },{
-            item:'Packing Snow'
+            title:'Packing Snow'
         },{
-            item:'Dirty Snow'
+            title:'Dirty Snow'
         },{
-            item:'Yellow Snow'
+            title:'Yellow Snow'
         },{
-            item:'Fresh Snow'
+            title:'Fresh Snow'
         },{
-            item:'Frozen Snow'
+            title:'Frozen Snow'
         },{
-            item:'Freezer Snow'
+            title:'Freezer Snow'
         },{
-            item:'Fluffy Snow'
+            title:'Fluffy Snow'
         },{
-            item:'SnowBalls'
+            title:'SnowBalls'
         },{
-            item:'Ice'
+            title:'Ice'
         },{
-            item:'Black Ice'
+            title:'Black Ice'
         }
     ];
 
