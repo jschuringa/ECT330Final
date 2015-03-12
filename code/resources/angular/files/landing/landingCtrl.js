@@ -1,6 +1,23 @@
 'use strict';
 
 snow.controller('landingCtrl',['$http','$scope','$window',function($http,$scope,$window){
+    $scope.$on('clicked',function(event,item){
+        $scope.showModal = true;
+        $scope.chosen = item;
+        if(!$scope.$$phase){
+            $scope.$apply();//lets angular know something changed
+        }
+    });
+
+    $scope.close = function(){
+        $scope.showModal = false;
+        $scope.chosen = null;
+    };
+
+    $scope.get = function(chosen){
+        console.log(chosen);
+    };
+    
     $http.get('/testItems').then(function(success){
         $scope.items = success.data;
     }).catch(function(err){

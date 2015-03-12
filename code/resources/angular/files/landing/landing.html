@@ -1,9 +1,32 @@
 <h1>Our Snow</h1>
 
-<div class="col-md-3" ng-repeat="item in items" highlight-dir>
+<div class="col-md-3 clickable" ng-repeat="item in items" highlight-dir="{{item.id}}">
     <h3>{{ item.title }}</h3>
 
     <p>Price: {{item.price | currency}}</p>
 
     <p>Quantity: {{item.quantity}}</p>
+</div>
+
+<!--Item Detail model-->
+<div class="blackBack" ng-show="showModal" ng-click="close()">
+    <div class="modal-dialog" ng-click="$event.stopPropagation()">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" ng-click="close()"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"> {{chosen.title}} </h4>
+            </div>
+
+            <div class="modal-body">
+                <p>COST:{{chosen.price | currency}}</p>
+
+                <p>There are {{chosen.quantity}} left</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="close()">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="get(chosen)">Add to Shopping Cart</button>
+            </div>
+        </div>
+    </div>
 </div>

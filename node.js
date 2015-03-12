@@ -42,6 +42,7 @@ app.get('/testItems',function(req,res){
             title:'Black Ice'
         }
     ];
+    var count = 0;
 
     //add random price and quantity
     for(var x in fakeItems){
@@ -51,6 +52,9 @@ app.get('/testItems',function(req,res){
 
             fakeItems[x].price = price;
             fakeItems[x].quantity = quantity;
+            fakeItems[x].id = count;
+
+            count++;
         }
     }
 
