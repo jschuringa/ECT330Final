@@ -2,6 +2,7 @@
 
 var util = require('util');
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 
 //outputs all requests to console
@@ -12,6 +13,8 @@ app.use(function(req,res,next){
 });
 
 //fake http calls used until real backend is up
+app.use(bodyParser.json());//body parser
+
 app.post('/login',function(req,res){
     res.send(200).end();
 });
@@ -63,6 +66,12 @@ app.get('/testItems',function(req,res){
 
 app.post('/shoppingCart',function(req,res){
     res.send(200).end();
+});
+
+app.post('/users',function(req,res){
+    console.log(req.body);
+
+    res.sendStatus(200);
 });
 
 app.use(express.static(__dirname + '/code'));
