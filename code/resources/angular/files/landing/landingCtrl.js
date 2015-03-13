@@ -18,6 +18,7 @@ snow.controller('landingCtrl',['$http','$scope','$window',function($http,$scope,
         $http.post('/shoppingCart',chosen).then(function(){
             //successfully added
             $scope.close();
+            $scope.$emit('updateCart');
             //TODO Add shopping cart functionality;
         }).catch(function(err){
             if(err.status){

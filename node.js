@@ -68,6 +68,18 @@ app.post('/shoppingCart',function(req,res){
     res.send(200).end();
 });
 
+app.get('/shoppingCart',function(req,res){
+    var data = [];
+    var num = Math.round(Math.random()*10);
+
+    while(num){
+        data.push({id:num});
+        num--;
+    }
+
+    res.send(data).end();
+});
+
 app.post('/users',function(req,res){
     console.log(req.body);
 
