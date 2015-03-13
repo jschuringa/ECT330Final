@@ -1,12 +1,13 @@
 'use strict';
 
-snow.controller('loginCtrl',['$http','$location','$scope','$window',function($http,$location,$scope,$window){
+snow.controller('loginCtrl',['$http','$location','$scope','userFactory','$window',function($http,$location,$scope,userFactory,$window){
     $scope.login = function(){
         if($scope.loginForm.$valid){
             var data = {user:$scope.user,password:$scope.password};
 
             $http.post('/login',data).then(function(){
                 //successfully logged in
+                userFactory.setUser({name:'test user'});
                 $location.path('/');
             }).catch(function(err){
                 if(err.status == 404){

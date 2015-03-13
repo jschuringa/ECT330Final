@@ -1,6 +1,6 @@
 'use strict';
 
-snow.controller('signupCtrl',['$http','$location','$scope','$window',function($http,$location,$scope,$window){
+snow.controller('signupCtrl',['$http','$location','$scope','userFactory','$window',function($http,$location,$scope,userFactory,$window){
     $scope.register = function(){
         if($scope.registrationForm.$valid){
             var data = {
@@ -13,6 +13,7 @@ snow.controller('signupCtrl',['$http','$location','$scope','$window',function($h
 
             $http.post('/users',data).then(function(){
                 $window.alert('Successfully signed up!');
+                userFactory.setUser({name:'new user'});
                 $location.path('/');
             }).catch(function(err){
                 if(err.status === 404){
