@@ -1,0 +1,25 @@
+<table class="table table-striped">
+    <tr>
+        <th>Buy</th>
+        <th>Quantity</th>
+        <th>Title</th>
+        <th>Price</th>
+    </tr>
+
+    <tr ng-repeat="item in shoppingItems">
+        <td ng-click="item.get = !item.get"><input type="checkbox" ng-model="item.get" ng-click="$event.stopPropagation()"></td>
+        <td>{{item.quantity}}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.price | currency}}</td>
+    </tr>
+
+    <tr>
+        <td><button type="button" class="btn btn-xs" ng-click="all()">Select All</button>
+            <button type="button" class="btn btn-xs" ng-click="none()">Select None</button></td>
+        <td></td>
+        <td></td>
+        <td>Total Price: {{total | currency}}</td>
+    </tr>
+</table>
+
+<button class="btn btn-lg btn-success pull-right" ng-click="buy()">Buy</button>
