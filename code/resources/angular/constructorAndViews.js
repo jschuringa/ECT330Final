@@ -13,5 +13,8 @@ snow.config(['$routeProvider',function($routeProvider){
     }).when('/login',{
         templateUrl:root + '/login/login.html',
         controller:'loginCtrl'
+    }).when('/signup',{
+        templateUrl:root + '/signup/signup.html',
+        controller:'signupCtrl'
     }).otherwise('/');
 }]);
