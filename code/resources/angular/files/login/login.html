@@ -1,4 +1,4 @@
-<form name="loginForm" ng-submit="login()">
+<form class="col-md-4 forceCenter" name="loginForm" ng-submit="login()">
     <div class="form-group" ng-class="{'has-error':!loginForm.user.$valid&&!loginForm.user.$pristine}">
         <input type="text" class="form-control" name="user" placeholder="NAME" ng-model="user" ng-required="1">
     </div>
