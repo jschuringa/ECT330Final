@@ -15,18 +15,30 @@ snow.controller('landingCtrl',['$http','$scope','$window',function($http,$scope,
     };
 
     $scope.get = function(chosen){
-        $http.post('/shoppingCart',chosen).then(function(){
-            //successfully added
-            $scope.close();
-            $scope.$emit('updateCart');
-            //TODO Add shopping cart functionality;
-        }).catch(function(err){
-            if(err.status){
-                $window.alert('Couldn\'t reach the server. Please try again');
-            }else{
-                $window.alert('Something went wrong while trying to add item to your shopping cart. Please try again');
+        if($scope.num <= $scope.chosen.quantity && $scope.num > 0){
+            $http.post('/shoppingCart',chosen).then(function(){
+                //successfully added
+                $scope.close();
+                $scope.$emit('updateCart');
+                //TODO Add shopping cart functionality;
+            }).catch(function(err){
+                if(err.status){
+                    $window.alert('Couldn\'t reach the server. Please try again');
+                }else{
+                    $window.alert('Something went wrong while trying to add item to your shopping cart. Please try again');
+                }
+            });
+        }else{
+            if($scope.num > $scope.chosen.quantity){
+                var number = $scope.chosen.quantity;
+                var title = $scope.chosen.title;
+
+                $window.alert('There are only ' + number + ' of ' + title + ' available.');
+            }else if($scope.num <= 0){
+                $window.alert('Must at least request 1 item');
             }
-        });
+        }
+
     };
     
     $http.get('/testItems').then(function(success){

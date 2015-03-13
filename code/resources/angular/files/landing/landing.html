@@ -19,6 +19,10 @@
                 <p>COST:{{chosen.price | currency}}</p>
 
                 <p>There are {{chosen.quantity}} left</p>
+
+                <p><label for="num">How many do you want?:</label>
+                    <input type="number" id="num" ng-model="num" ng-init="num = 1">
+                </p>
             </div>
 
             <div class="modal-footer">
