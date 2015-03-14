@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace code.Models
 {
@@ -12,6 +13,12 @@ namespace code.Models
         public DBcontext() : base("name=smznDB")
         {
 
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+       
         }
 
         public virtual DbSet<address> addresses { get; set; }

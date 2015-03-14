@@ -23,7 +23,6 @@ namespace code.Models
         public string password { get; set; }
         public bool admin { get; set; }
 
-        public virtual ICollection<cart> carts { get; set; }
         public virtual ICollection<order> orders { get; set; }
         public virtual ICollection<paymentOption> paymentOptions { get; set; }
         public virtual ICollection<address> addresses { get; set; }
