@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="snow">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>SNOWMAZON</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <!--My Files-->
+    <link href="/resources/css/style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="pull-right" shopping-dir="">
+            <div class="glyphicon glyphicon-shopping-cart">{{shoppingNum}}</div>
+        </div>
+
+        <h1 class="text-center">SNOWMAZON</h1>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="btn-group pull-right">
+                <button class="btn btn-default" nav-dir="/">HOME</button>
+                <button class="btn btn-default" nav-dir="/login">LOGIN</button>
+                <button class="btn btn-default" nav-dir="/signup">SIGNUP</button>
+                <button class="btn btn-default" nav-dir="/checkout">CHECK OUT</button>
+                <button class="btn btn-default" nav-dir="/information">ABOUT US</button>
+            </div>
+
+            <h1>Welcome {{name}}</h1>
+        </div>
+
+        <div class="panel-body">
+            <div ng-view></div>
+        </div>
+    </div>
+
+    <h6 class="text-center">For Awesome Educational Use Only</h6>
+</div>
+
+<!--Jquery-->
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+<!--Angular Code-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.js"></script>
+<!--Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script></body>
+
+<!--My Files-->
+<script src="/snow.min.js"></script>
+</html>

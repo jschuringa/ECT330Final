@@ -1,0 +1,11 @@
+<form class="col-md-4 forceCenter" name="loginForm" ng-submit="login()">
+    <div class="form-group" ng-class="{'has-error':!loginForm.user.$valid&&!loginForm.user.$pristine}">
+        <input type="text" class="form-control" name="user" placeholder="NAME" ng-model="user" ng-required="1">
+    </div>
+
+    <div class="form-group" ng-class="{'has-error':!loginForm.password.$valid&&!loginForm.password.$pristine}">
+        <input type="password" class="form-control" name="password" placeholder="PASSWORD" ng-model="password" ng-required="1">
+    </div>
+
+    <button type="submit" class="btn btn-success">LOGIN</button>
+</form>
