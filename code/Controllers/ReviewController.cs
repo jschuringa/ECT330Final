@@ -36,6 +36,7 @@ namespace code.Controllers
         }
 
         // PUT api/review/5
+        [Authorize]
         public IHttpActionResult Putreview(int id, review review)
         {
             if (!ModelState.IsValid)
@@ -71,6 +72,7 @@ namespace code.Controllers
 
         // POST api/review
         [ResponseType(typeof(review))]
+        [Authorize]
         public IHttpActionResult Postreview(review review)
         {
             if (!ModelState.IsValid)
@@ -86,6 +88,7 @@ namespace code.Controllers
 
         // DELETE api/review/5
         [ResponseType(typeof(review))]
+        [Authorize]
         public IHttpActionResult Deletereview(int id)
         {
             review review = db.reviews.Find(id);

@@ -17,6 +17,7 @@ namespace code.Controllers
         private DBcontext db = new DBcontext();
 
         // GET api/customer
+        [Authorize]
         public IQueryable<customer> Getcustomers()
         {
             return db.customers;
@@ -24,6 +25,7 @@ namespace code.Controllers
 
         // GET api/customer/5
         [ResponseType(typeof(customer))]
+        [Authorize]
         public IHttpActionResult Getcustomer(int id)
         {
             customer customer = db.customers.Find(id);
@@ -71,6 +73,7 @@ namespace code.Controllers
 
         // POST api/customer
         [ResponseType(typeof(customer))]
+        [Authorize]
         public IHttpActionResult Postcustomer(customer customer)
         {
             if (!ModelState.IsValid)
@@ -86,6 +89,7 @@ namespace code.Controllers
 
         // DELETE api/customer/5
         [ResponseType(typeof(customer))]
+        [Authorize]
         public IHttpActionResult Deletecustomer(int id)
         {
             customer customer = db.customers.Find(id);

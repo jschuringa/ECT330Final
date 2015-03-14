@@ -17,6 +17,7 @@ namespace code.Controllers
         private DBcontext db = new DBcontext();
 
         // GET api/order
+        [Authorize]
         public IQueryable<order> Getorders()
         {
             return db.orders;
@@ -24,6 +25,7 @@ namespace code.Controllers
 
         // GET api/order/5
         [ResponseType(typeof(order))]
+        [Authorize]
         public IHttpActionResult Getorder(int id)
         {
             order order = db.orders.Find(id);
@@ -36,6 +38,7 @@ namespace code.Controllers
         }
 
         // PUT api/order/5
+        [Authorize]
         public IHttpActionResult Putorder(int id, order order)
         {
             if (!ModelState.IsValid)
@@ -71,6 +74,7 @@ namespace code.Controllers
 
         // POST api/order
         [ResponseType(typeof(order))]
+        [Authorize]
         public IHttpActionResult Postorder(order order)
         {
             if (!ModelState.IsValid)
@@ -86,6 +90,7 @@ namespace code.Controllers
 
         // DELETE api/order/5
         [ResponseType(typeof(order))]
+        [Authorize]
         public IHttpActionResult Deleteorder(int id)
         {
             order order = db.orders.Find(id);

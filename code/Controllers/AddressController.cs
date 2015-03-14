@@ -17,12 +17,14 @@ namespace code.Controllers
         private DBcontext db = new DBcontext();
 
         // GET api/address
+        [Authorize]
         public IQueryable<address> Getaddresses()
         {
             return db.addresses;
         }
 
         // GET api/address/5
+        [Authorize]
         [ResponseType(typeof(address))]
         public IHttpActionResult Getaddress(int id)
         {
@@ -36,6 +38,7 @@ namespace code.Controllers
         }
 
         // PUT api/address/5
+        [Authorize]
         public IHttpActionResult Putaddress(int id, address address)
         {
             if (!ModelState.IsValid)
@@ -71,6 +74,7 @@ namespace code.Controllers
 
         // POST api/address
         [ResponseType(typeof(address))]
+        [Authorize]
         public IHttpActionResult Postaddress(address address)
         {
             if (!ModelState.IsValid)
@@ -86,6 +90,7 @@ namespace code.Controllers
 
         // DELETE api/address/5
         [ResponseType(typeof(address))]
+        [Authorize]
         public IHttpActionResult Deleteaddress(int id)
         {
             address address = db.addresses.Find(id);

@@ -36,6 +36,7 @@ namespace code.Controllers
         }
 
         // PUT api/item/5
+        [Authorize]
         public IHttpActionResult Putitem(int id, item item)
         {
             if (!ModelState.IsValid)
@@ -86,6 +87,7 @@ namespace code.Controllers
 
         // DELETE api/item/5
         [ResponseType(typeof(item))]
+        [Authorize]
         public IHttpActionResult Deleteitem(int id)
         {
             item item = db.items.Find(id);

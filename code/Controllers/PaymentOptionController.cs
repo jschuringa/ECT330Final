@@ -17,6 +17,7 @@ namespace code.Controllers
         private DBcontext db = new DBcontext();
 
         // GET api/paymentOption
+        [Authorize]
         public IQueryable<paymentOption> GetpaymentOptions()
         {
             return db.paymentOptions;
@@ -24,6 +25,7 @@ namespace code.Controllers
 
         // GET api/paymentOption/5
         [ResponseType(typeof(paymentOption))]
+        [Authorize]
         public IHttpActionResult GetpaymentOption(int id)
         {
             paymentOption paymentoption = db.paymentOptions.Find(id);
@@ -36,6 +38,7 @@ namespace code.Controllers
         }
 
         // PUT api/paymentOption/5
+        [Authorize]
         public IHttpActionResult PutpaymentOption(int id, paymentOption paymentoption)
         {
             if (!ModelState.IsValid)
@@ -71,6 +74,7 @@ namespace code.Controllers
 
         // POST api/paymentOption
         [ResponseType(typeof(paymentOption))]
+        [Authorize]
         public IHttpActionResult PostpaymentOption(paymentOption paymentoption)
         {
             if (!ModelState.IsValid)
@@ -86,6 +90,7 @@ namespace code.Controllers
 
         // DELETE api/paymentOption/5
         [ResponseType(typeof(paymentOption))]
+        [Authorize]
         public IHttpActionResult DeletepaymentOption(int id)
         {
             paymentOption paymentoption = db.paymentOptions.Find(id);
