@@ -12,18 +12,17 @@ using code.Models;
 
 namespace code.Controllers
 {
-    public class AddressController : ApiController
+    public class addressController : ApiController
     {
         private DBcontext db = new DBcontext();
 
-        // GET api/Address
+        // GET api/address
         public IQueryable<address> Getaddresses()
         {
             return db.addresses;
         }
 
-        // GET api/Address/5
-        [Authorize]
+        // GET api/address/5
         [ResponseType(typeof(address))]
         public IHttpActionResult Getaddress(int id)
         {
@@ -36,8 +35,7 @@ namespace code.Controllers
             return Ok(address);
         }
 
-        // PUT api/Address/5
-        [Authorize]
+        // PUT api/address/5
         public IHttpActionResult Putaddress(int id, address address)
         {
             if (!ModelState.IsValid)
@@ -71,8 +69,7 @@ namespace code.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/Address
-        [Authorize]
+        // POST api/address
         [ResponseType(typeof(address))]
         public IHttpActionResult Postaddress(address address)
         {
@@ -87,8 +84,7 @@ namespace code.Controllers
             return CreatedAtRoute("DefaultApi", new { id = address.custAddressID }, address);
         }
 
-        // DELETE api/Address/5
-        [Authorize]
+        // DELETE api/address/5
         [ResponseType(typeof(address))]
         public IHttpActionResult Deleteaddress(int id)
         {
