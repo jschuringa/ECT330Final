@@ -12,17 +12,17 @@ using code.Models;
 
 namespace code.Controllers
 {
-    public class reviewController : ApiController
+    public class ReviewController : ApiController
     {
         private DBcontext db = new DBcontext();
 
-        // GET api/review
+        // GET api/Review
         public IQueryable<review> Getreviews()
         {
             return db.reviews;
         }
 
-        // GET api/review/5
+        // GET api/Review/5
         [ResponseType(typeof(review))]
         public IHttpActionResult Getreview(int id)
         {
@@ -35,7 +35,7 @@ namespace code.Controllers
             return Ok(review);
         }
 
-        // PUT api/review/5
+        // PUT api/Review/5
         public IHttpActionResult Putreview(int id, review review)
         {
             if (!ModelState.IsValid)
@@ -69,7 +69,7 @@ namespace code.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/review
+        // POST api/Review
         [ResponseType(typeof(review))]
         public IHttpActionResult Postreview(review review)
         {
@@ -84,7 +84,7 @@ namespace code.Controllers
             return CreatedAtRoute("DefaultApi", new { id = review.reviewID }, review);
         }
 
-        // DELETE api/review/5
+        // DELETE api/Review/5
         [ResponseType(typeof(review))]
         public IHttpActionResult Deletereview(int id)
         {

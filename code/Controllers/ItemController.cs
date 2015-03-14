@@ -12,17 +12,17 @@ using code.Models;
 
 namespace code.Controllers
 {
-    public class itemController : ApiController
+    public class ItemController : ApiController
     {
         private DBcontext db = new DBcontext();
 
-        // GET api/item
+        // GET api/Item
         public IQueryable<item> Getitems()
         {
             return db.items;
         }
 
-        // GET api/item/5
+        // GET api/Item/5
         [ResponseType(typeof(item))]
         public IHttpActionResult Getitem(int id)
         {
@@ -35,7 +35,7 @@ namespace code.Controllers
             return Ok(item);
         }
 
-        // PUT api/item/5
+        // PUT api/Item/5
         public IHttpActionResult Putitem(int id, item item)
         {
             if (!ModelState.IsValid)
@@ -69,7 +69,7 @@ namespace code.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/item
+        // POST api/Item
         [ResponseType(typeof(item))]
         public IHttpActionResult Postitem(item item)
         {
@@ -84,7 +84,7 @@ namespace code.Controllers
             return CreatedAtRoute("DefaultApi", new { id = item.itemID }, item);
         }
 
-        // DELETE api/item/5
+        // DELETE api/Item/5
         [ResponseType(typeof(item))]
         public IHttpActionResult Deleteitem(int id)
         {

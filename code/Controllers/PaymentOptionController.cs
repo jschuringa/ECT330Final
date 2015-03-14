@@ -12,17 +12,17 @@ using code.Models;
 
 namespace code.Controllers
 {
-    public class paymentOptionController : ApiController
+    public class PaymentOptionController : ApiController
     {
         private DBcontext db = new DBcontext();
 
-        // GET api/paymentOption
+        // GET api/PaymentOption
         public IQueryable<paymentOption> GetpaymentOptions()
         {
             return db.paymentOptions;
         }
 
-        // GET api/paymentOption/5
+        // GET api/PaymentOption/5
         [ResponseType(typeof(paymentOption))]
         public IHttpActionResult GetpaymentOption(int id)
         {
@@ -35,7 +35,7 @@ namespace code.Controllers
             return Ok(paymentoption);
         }
 
-        // PUT api/paymentOption/5
+        // PUT api/PaymentOption/5
         public IHttpActionResult PutpaymentOption(int id, paymentOption paymentoption)
         {
             if (!ModelState.IsValid)
@@ -69,7 +69,7 @@ namespace code.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/paymentOption
+        // POST api/PaymentOption
         [ResponseType(typeof(paymentOption))]
         public IHttpActionResult PostpaymentOption(paymentOption paymentoption)
         {
@@ -84,7 +84,7 @@ namespace code.Controllers
             return CreatedAtRoute("DefaultApi", new { id = paymentoption.custPayOptID }, paymentoption);
         }
 
-        // DELETE api/paymentOption/5
+        // DELETE api/PaymentOption/5
         [ResponseType(typeof(paymentOption))]
         public IHttpActionResult DeletepaymentOption(int id)
         {

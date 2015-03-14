@@ -12,17 +12,18 @@ using code.Models;
 
 namespace code.Controllers
 {
-    public class customerController : ApiController
+    public class CustomerController : ApiController
     {
         private DBcontext db = new DBcontext();
 
-        // GET api/customer
+        // GET api/Customer
         public IQueryable<customer> Getcustomers()
         {
             return db.customers;
         }
 
-        // GET api/customer/5
+        // GET api/Customer/5
+        [Authorize]
         [ResponseType(typeof(customer))]
         public IHttpActionResult Getcustomer(int id)
         {
@@ -35,7 +36,7 @@ namespace code.Controllers
             return Ok(customer);
         }
 
-        // PUT api/customer/5
+        // PUT api/Customer/5
         public IHttpActionResult Putcustomer(int id, customer customer)
         {
             if (!ModelState.IsValid)
@@ -69,7 +70,8 @@ namespace code.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/customer
+        // POST api/Customer
+        [Authorize]
         [ResponseType(typeof(customer))]
         public IHttpActionResult Postcustomer(customer customer)
         {
@@ -84,7 +86,8 @@ namespace code.Controllers
             return CreatedAtRoute("DefaultApi", new { id = customer.customerID }, customer);
         }
 
-        // DELETE api/customer/5
+        // DELETE api/Customer/5
+        [Authorize]
         [ResponseType(typeof(customer))]
         public IHttpActionResult Deletecustomer(int id)
         {
