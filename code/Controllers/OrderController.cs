@@ -12,17 +12,17 @@ using code.Models;
 
 namespace code.Controllers
 {
-    public class OrderController : ApiController
+    public class orderController : ApiController
     {
         private DBcontext db = new DBcontext();
 
-        // GET api/Order
+        // GET api/order
         public IQueryable<order> Getorders()
         {
             return db.orders;
         }
 
-        // GET api/Order/5
+        // GET api/order/5
         [ResponseType(typeof(order))]
         public IHttpActionResult Getorder(int id)
         {
@@ -35,7 +35,7 @@ namespace code.Controllers
             return Ok(order);
         }
 
-        // PUT api/Order/5
+        // PUT api/order/5
         public IHttpActionResult Putorder(int id, order order)
         {
             if (!ModelState.IsValid)
@@ -69,7 +69,7 @@ namespace code.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/Order
+        // POST api/order
         [ResponseType(typeof(order))]
         public IHttpActionResult Postorder(order order)
         {
@@ -84,7 +84,7 @@ namespace code.Controllers
             return CreatedAtRoute("DefaultApi", new { id = order.orderID }, order);
         }
 
-        // DELETE api/Order/5
+        // DELETE api/order/5
         [ResponseType(typeof(order))]
         public IHttpActionResult Deleteorder(int id)
         {
