@@ -13,17 +13,17 @@ using System.Web;
 
 namespace code.Controllers
 {
-    public class customerController : ApiController
+    public class loginController : ApiController
     {
         private DBcontext db = new DBcontext();
 
-        // GET api/customer
+        // GET api/login
         public IQueryable<customer> Getcustomers()
         {
             return db.customers;
         }
 
-        // GET api/customer/5
+        // GET api/login/5
         [ResponseType(typeof(customer))]
         public IHttpActionResult Getcustomer(int id)
         {
@@ -36,7 +36,7 @@ namespace code.Controllers
             return Ok(customer);
         }
 
-        // PUT api/customer/5
+        // PUT api/login/5
         public IHttpActionResult Putcustomer(int id, customer customer)
         {
             if (!ModelState.IsValid)
@@ -70,22 +70,32 @@ namespace code.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/customer
+        // POST api/login
         [ResponseType(typeof(customer))]
-        public IHttpActionResult Postcustomer(customer customer)
+        public IHttpActionResult login(customer customer)
         {
-            if (!ModelState.IsValid)
+            using (DBcontext context = new DBcontext())
             {
-                return BadRequest(ModelState);
+                var user = (from s in context.customers
+                            where s.username == customer.username && s.password == customer.password
+                            select s).FirstOrDefault();
+
+
+                if (user != null)
+                {
+                    HttpContext.Current.Session["LoggedInId"] = customer.customerID.ToString();
+                    HttpContext.Current.Session["Username"] = customer.username;
+                    return Ok(customer);
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
 
-            db.customers.Add(customer);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = customer.customerID }, customer);
         }
 
-        // DELETE api/customer/5
+        // DELETE api/login/5
         [ResponseType(typeof(customer))]
         public IHttpActionResult Deletecustomer(int id)
         {
