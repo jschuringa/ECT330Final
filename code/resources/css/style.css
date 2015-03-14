@@ -1,5 +1,11 @@
-.clickable{
+.snowItems{
     cursor:pointer;
+    height:300px;
+}
+
+.snowImageThumbnail{
+    height:175px;
+    width:auto;
 }
 
 .blackBack{
