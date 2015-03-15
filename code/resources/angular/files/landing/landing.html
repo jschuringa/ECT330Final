@@ -1,9 +1,11 @@
 <h1>Our Snow</h1>
 
-<div class="col-md-3 clickable" ng-repeat="item in items" highlight-dir="{{item.id}}">
-    <h3>{{ item.title }}</h3>
+<div class="col-md-3 snowItems" ng-repeat="item in items" highlight-dir="{{item.id}}">
+    <h3>{{ item.itemName }}</h3>
 
-    <p>Price: {{item.price | currency}}</p>
+    <img src="{{item.imgPath}}" class="snowImageThumbnail">
+
+    <p>Price: {{item.itemPrice | currency}}</p>
 </div>
 
 <!--Item Detail model-->
@@ -12,13 +14,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" aria-label="Close" ng-click="close()"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel"> {{chosen.title}} </h4>
+                <h4 class="modal-title" id="myModalLabel"> {{chosen.itemName}} </h4>
             </div>
 
             <div class="modal-body">
-                <p>COST:{{chosen.price | currency}}</p>
+                <img src="{{chosen.imgPath}}" class="img-responsive">
 
-                <p>There are {{chosen.quantity}} left</p>
+                <p>COST:{{chosen.itemPrice | currency}}</p>
 
                 <p><label for="num">How many do you want?:</label>
                     <input type="number" id="num" ng-model="num" ng-init="num = 1">
