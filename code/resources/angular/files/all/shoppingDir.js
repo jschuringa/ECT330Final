@@ -7,17 +7,15 @@ snow.directive('shoppingDir',['userFactory','$http','$rootScope',function(userFa
             scope.shoppingNum = refreshCount();
 
             $rootScope.$on('updateCart',function(){
-                scope.shoppingNum = refreshCount();
+                refreshCount();
             });
 
             function refreshCount(){
-                var user = userFactory.getUser();
-
-                if(user !== null){
-                    return user.orders.length;
-                }else{
-                    return 0;
-                }
+                userFactory.getUser().then(function(success){
+                    scope.shoppingNum = success.data.orders.length;
+                }).catch(function(){//user is not logged in
+                    scope.shoppingNum = 0;
+                });
             }
         }
     };

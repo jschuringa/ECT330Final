@@ -8,9 +8,10 @@ snow.controller('loginCtrl',['$http','$location','$scope','userFactory','$window
 
             localStorage.removeItem('user');//removes previous user on login attempt
 
-            $http.get('/api/customer',authHeader).then(function(success){
+            $http.get('/api/customer',authHeader).then(function(){
                 //successfully logged in
-                userFactory.setUser(success.data);
+                userFactory.saveAuth($scope.user,$scope.password);
+                $scope.$emit('updateCart');
                 $location.path('/');
             }).catch(function(err){
                 if(err.status == 404){

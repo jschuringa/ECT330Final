@@ -3,7 +3,9 @@
 snow.controller('checkoutCtrl',['userFactory','$http','$scope','$window',function(userFactory,$http,$scope,$window){
     $scope.total = 0;
 
-    $scope.shoppingItems = userFactory.getUser().orders;
+    userFactory.getUser().then(function(success){
+        $scope.shoppingItems = success.data.orders;
+    });
 
     $scope.all = function(){
         $scope.shoppingItems.forEach(function(item){

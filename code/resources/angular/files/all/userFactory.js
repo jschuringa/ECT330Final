@@ -1,37 +1,21 @@
 'use strict';
 
-snow.factory('userFactory',['$rootScope',function($rootScope){
-    var user = localStorage.getItem('user');
-
-    if(user !== null && user.length !== 0){
-        user = JSON.parse(user);
-        $rootScope.name = user.firstName + ' ' + user.lastName;
-    }
-
+snow.factory('userFactory',['$http','$rootScope',function($http,$rootScope){
     return {
-        getAuth:getAuth,
         getUser:getUser,
-        setUser:setUser,
+        saveAuth:saveAuth,
         updateUser:updateUser
     };
 
-    function getAuth(){
-        if(user !== null){
-            return 'Basic ' + window.btoa(user.username + ':' + user.password);
-        }else{
-            return null;
-        }
-
+    function saveAuth(username,password){
+        localStorage.setItem('auth','Basic ' + window.btoa(username + ':' + password));
     }
 
     function getUser(){
-        return user;
-    }
-
-    function setUser(inUser){
-        user = inUser;
-        updateUser();
-        $rootScope.name = user.firstName + ' ' + user.lastName;
+        return $http.get('/api/customer').then(function(success){
+            $rootScope.name = success.data.firstName + ' ' + success.data.lastName;
+            return success;
+        });
     }
 
     function updateUser(){

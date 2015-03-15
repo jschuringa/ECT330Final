@@ -1,10 +1,10 @@
 'use strict';
 
-snow.factory('authInterceptor',['userFactory',function(userFactory){
+snow.factory('authInterceptor',[function(){
     return {
         'request':function(config){
             if(config.headers.Authorization === undefined){//headers aren't set
-                config.headers.Authorization = userFactory.getAuth();
+                config.headers.Authorization = localStorage.getItem('auth');
             }
 
             return config;

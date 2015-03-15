@@ -9,9 +9,9 @@
 
         <tr ng-repeat="item in shoppingItems">
             <td ng-click="item.get = !item.get"><input type="checkbox" ng-model="item.get" ng-click="$event.stopPropagation()"></td>
-            <td>{{item.quantity}}</td>
-            <td>{{item.title}}</td>
-            <td>{{item.price | currency}}</td>
+            <td>{{item.itemQTY}}</td>
+            <td>{{item.items.itemName}}</td>
+            <td>{{item.items.itemPrice | currency}}</td>
         </tr>
 
         <tr>

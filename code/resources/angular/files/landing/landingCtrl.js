@@ -14,20 +14,17 @@ snow.controller('landingCtrl',['userFactory','$http','$scope','$window',function
         $scope.chosen = null;
     };
 
-    $scope.get = function(chosen){
+    $scope.get = function(){
         if($scope.num > 0){
             var data = {
                 itemId:$scope.chosen.itemID,
                 orderDate:new Date().toISOString().slice(0, 19).replace('T', ' '),
                 itemQTY:$scope.num
             };
-            console.log($scope.chosen);
 
-            $http.post('/api/order',data,chosen).then(function(success){
+            $http.post('/api/order',data).then(function(){
                 //successfully added
                 $scope.close();
-                userFactory.getUser().orders.push(success.data);//add order to user object
-                userFactory.updateUser();
                 $scope.$emit('updateCart');
                 //TODO Add shopping cart functionality;
             }).catch(function(err){

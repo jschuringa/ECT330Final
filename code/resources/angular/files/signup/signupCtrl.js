@@ -10,8 +10,9 @@ snow.controller('signupCtrl',['$http','$location','$scope','userFactory','$windo
                 password:$scope.password
             };
 
-            $http.post('/api/customer',data).then(function(success){
-                userFactory.setUser(success.data);
+            $http.post('/api/customer',data).then(function(){
+                userFactory.saveAuth($scope.username,$scope.password);
+                $scope.$emit('updateCart');
 
                 data = {
                     addressLine1:$scope.address,
