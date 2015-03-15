@@ -160,7 +160,6 @@
     <Compile Include="Models\DBcontext.cs" />
     <Compile Include="Models\item.cs" />
     <Compile Include="Models\order.cs" />
-    <Compile Include="Models\paymentOption.cs" />
     <Compile Include="Models\review.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

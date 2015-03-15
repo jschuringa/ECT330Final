@@ -12,7 +12,6 @@ namespace code.Models
         public customer()
         {
             this.orders = new HashSet<order>();
-            this.paymentOptions = new HashSet<paymentOption>();
             this.addresses = new HashSet<address>();
         }
         [Key]
@@ -24,7 +23,6 @@ namespace code.Models
         public bool admin { get; set; }
 
         public virtual ICollection<order> orders { get; set; }
-        public virtual ICollection<paymentOption> paymentOptions { get; set; }
         public virtual ICollection<address> addresses { get; set; }
 
     }

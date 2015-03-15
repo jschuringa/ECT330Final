@@ -25,7 +25,6 @@ namespace code.Models
 
         public virtual customer customers { get; set; }
         public virtual item items { get; set; }
-        public virtual paymentOption paymentOptions { get; set; }
         public virtual address addresses { get; set; }
 
     }

@@ -25,7 +25,6 @@ namespace code.Models
         public virtual DbSet<item> items { get; set; }
         public virtual DbSet<customer> customers { get; set; }
         public virtual DbSet<order> orders { get; set; }
-        public virtual DbSet<paymentOption> paymentOptions { get; set; }
         public virtual DbSet<review> reviews { get; set; }
         
     }

@@ -11,7 +11,7 @@ namespace code.Models
     {
         public address()
         {
-            this.orders = new HashSet<order>();
+
         }
         public int customerID { get; set; }
         [Key]
@@ -25,6 +25,5 @@ namespace code.Models
 
         public virtual customer customers { get; set; }
 
-        public virtual ICollection<order> orders { get; set; }
     }
 }
