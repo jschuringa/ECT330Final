@@ -25,7 +25,7 @@ namespace code.Controllers
         }
 
         // GET api/address/5
-        [Authorize]
+        [BasicAuthenticationFilter]
         [ResponseType(typeof(address))]
         public IHttpActionResult Getaddress(int id)
         {
@@ -39,7 +39,7 @@ namespace code.Controllers
         }
 
         // PUT api/address/5
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IHttpActionResult Putaddress(int id, address address)
         {
             if (!ModelState.IsValid)
@@ -75,7 +75,7 @@ namespace code.Controllers
 
         // POST api/address
         [ResponseType(typeof(address))]
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IHttpActionResult Postaddress(address address)
         {
             if (!ModelState.IsValid)
@@ -91,7 +91,7 @@ namespace code.Controllers
 
         // DELETE api/address/5
         [ResponseType(typeof(address))]
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IHttpActionResult Deleteaddress(int id)
         {
             address address = db.addresses.Find(id);

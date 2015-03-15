@@ -9,8 +9,8 @@
                 <input type="text" placeholder="LAST NAME" class="form-control" name="lname" ng-model="lname" ng-required="1">
             </div>
 
-            <div class="form-group" ng-class="{'has-error':!registrationForm.email.$valid&&!registrationForm.email.$pristine}">
-                <input type="email" placeholder="EMAIL" class="form-control" name="email" ng-model="email" ng-required="1">
+            <div class="form-group" ng-class="{'has-error':!registrationForm.username.$valid&&!registrationForm.username.$pristine}">
+                <input type="text" placeholder="USERNAME" class="form-control" name="username" ng-model="username" ng-required="1">
             </div>
 
             <div class="form-group" ng-class="{'has-error':!registrationForm.password.$valid&&!registrationForm.password.$pristine}">
@@ -19,10 +19,6 @@
 
             <div class="form-group" ng-class="{'has-error':!registrationForm.password2.$valid&&!registrationForm.password2.$pristine}">
                 <input type="password" placeholder="CONFIRM PASSWORD" class="form-control" name="password2" ng-model="password2" ng-required="1">
-            </div>
-
-            <div class="form-group" ng-class="{'has-error':!registrationForm.phone.$valid&&!registrationForm.phone.$pristine}">
-                <input type="text" placeholder="PHONE NUMBER(XXX-XXX-XXXX)" class="form-control" name="phone" ng-model="phone" ng-required="1">
             </div>
 
             <button type="submit" class="btn btn-success">REGISTER</button>

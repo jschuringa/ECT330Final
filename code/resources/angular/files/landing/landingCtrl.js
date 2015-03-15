@@ -1,6 +1,6 @@
 'use strict';
 
-snow.controller('landingCtrl',['$http','$scope','$window',function($http,$scope,$window){
+snow.controller('landingCtrl',['userFactory','$http','$scope','$window',function(userFactory,$http,$scope,$window){
     $scope.$on('clicked',function(event,item){
         $scope.showModal = true;
         $scope.chosen = item;
@@ -13,6 +13,8 @@ snow.controller('landingCtrl',['$http','$scope','$window',function($http,$scope,
         $scope.showModal = false;
         $scope.chosen = null;
     };
+
+    console.log(userFactory.getUser());
 
     $scope.get = function(chosen){
         if($scope.num > 0){

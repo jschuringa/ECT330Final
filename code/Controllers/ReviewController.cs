@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using code.Models;
+using code.Filters;
 
 namespace code.Controllers
 {
@@ -36,7 +37,7 @@ namespace code.Controllers
         }
 
         // PUT api/review/5
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IHttpActionResult Putreview(int id, review review)
         {
             if (!ModelState.IsValid)
@@ -72,7 +73,7 @@ namespace code.Controllers
 
         // POST api/review
         [ResponseType(typeof(review))]
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IHttpActionResult Postreview(review review)
         {
             if (!ModelState.IsValid)
@@ -88,7 +89,7 @@ namespace code.Controllers
 
         // DELETE api/review/5
         [ResponseType(typeof(review))]
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IHttpActionResult Deletereview(int id)
         {
             review review = db.reviews.Find(id);

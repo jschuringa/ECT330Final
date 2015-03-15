@@ -4,16 +4,15 @@ snow.controller('signupCtrl',['$http','$location','$scope','userFactory','$windo
     $scope.register = function(){
         if($scope.registrationForm.$valid){
             var data = {
-                fname:$scope.fname,
-                lname:$scope.lname,
-                email:$scope.email,
-                password:$scope.password,
-                phone:$scope.phone
+                firstName:$scope.fname,
+                lastName:$scope.lname,
+                username:$scope.username,
+                password:$scope.password
             };
 
-            $http.post('/users',data).then(function(){
+            $http.post('/api/customer',data).then(function(success){
                 $window.alert('Successfully signed up!');
-                userFactory.setUser({name:'new user'});
+                userFactory.setUser(success.data);
                 $location.path('/');
             }).catch(function(err){
                 if(err.status === 404){
@@ -43,18 +42,6 @@ snow.controller('signupCtrl',['$http','$location','$scope','userFactory','$windo
                 if($scope.password.length >= 8){
                     $scope.registrationForm.password.$setValidity('Password doesn\'t meet criteria',true);
                 }
-            }
-        }
-    });
-
-    $scope.$watch('phone',function(){
-        if($scope.phone !== undefined){
-            $scope.phone = $scope.phone.replace(/[^-0-9]/g,'');//only allows digits and '-'
-
-            if($scope.phone.length < 10){
-                $scope.registrationForm.phone.$setValidity('Bad Phone Length',false);//Done manually to allow above code to run on short entries
-            }else{
-                $scope.registrationForm.phone.$setValidity('Bad Phone Length',true);
             }
         }
     });

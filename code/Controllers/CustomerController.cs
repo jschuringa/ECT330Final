@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using code.Models;
 using System.Web;
+using code.Filters;
 
 namespace code.Controllers
 {
@@ -18,9 +19,22 @@ namespace code.Controllers
         private DBcontext db = new DBcontext();
 
         // GET api/customer
-        public IQueryable<customer> Getcustomers()
+        [BasicAuthenticationFilter]
+        public IHttpActionResult Getcustomers()
         {
-            return db.customers;
+            
+            try {
+                int customerId = (int) Request.Properties["id"];
+
+                customer customer = db.customers.Find(customerId);
+                if (customer == null) {
+                    return Unauthorized();
+                }
+
+                return Ok(customer);
+            } catch (KeyNotFoundException e) {
+                return Unauthorized();
+            }
         }
 
         // GET api/customer/5
