@@ -102,6 +102,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="adddb.aspx" />
     <Content Include="App_Data\smznDB.mdf" />
     <Content Include="App_Data\smznDB_log.ldf">
       <DependentUpon>smznDB.mdf</DependentUpon>
@@ -143,12 +144,18 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adddb.aspx.cs">
+      <DependentUpon>adddb.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adddb.aspx.designer.cs">
+      <DependentUpon>adddb.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
-    <Compile Include="Controllers\PaymentOptionController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Filters\BasicAuthenticationFilter.cs" />
     <Compile Include="Filters\BasicAuthenticationIdentity.cs" />
