@@ -26,6 +26,7 @@ snow.controller('landingCtrl',['userFactory','$http','$scope','$window',function
                 //successfully added
                 $scope.close();
                 $scope.$emit('updateCart');
+                $scope.num = 1;//reset quantity
                 //TODO Add shopping cart functionality;
             }).catch(function(err){
                 if(err.status){
