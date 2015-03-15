@@ -5,19 +5,11 @@ snow.controller('checkoutCtrl',['userFactory','$http','$scope','$window',functio
 
     userFactory.getUser().then(function(success){
         $scope.shoppingItems = success.data.orders;
+
+        $scope.shoppingItems.forEach(function(item){
+            $scope.total += item.items.itemPrice * item.itemQTY;
+        });
     });
-
-    $scope.all = function(){
-        $scope.shoppingItems.forEach(function(item){
-            item.get = true;
-        });
-    };
-
-    $scope.none = function(){
-        $scope.shoppingItems.forEach(function(item){
-            item.get = false;
-        });
-    };
 
     $scope.buy = function(){
         if($scope.shoppingItems.some(function(item){return item.get})){
