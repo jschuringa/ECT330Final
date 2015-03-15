@@ -1,4 +1,5 @@
-﻿using System;
+﻿using code.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -89,7 +90,11 @@ namespace code.Filters {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return false;
 
-            return true;
+            using (DBcontext db = new DBcontext()) {
+                var user = from u in db.customers where (u.username.Equals(username) && u.password.Equals(password)) select u;
+
+                return user.ToArray().Length != 0;
+            }
         }
 
         /// <summary>
