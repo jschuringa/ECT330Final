@@ -19,13 +19,11 @@ namespace code.Models
         [Key]
         public int orderID { get; set; }
         public DateTime orderDate { get; set; }
-        public int custAddressID { get; set; }
-        public int custPayOptID { get; set; }
+
         public int itemQTY { get; set; }
 
         public virtual customer customers { get; set; }
         public virtual item items { get; set; }
-        public virtual address addresses { get; set; }
 
     }
 }
