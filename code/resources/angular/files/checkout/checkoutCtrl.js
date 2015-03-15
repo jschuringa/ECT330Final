@@ -1,23 +1,9 @@
 'use strict';
 
-snow.controller('checkoutCtrl',['$http','$scope','$window',function($http,$scope,$window){
+snow.controller('checkoutCtrl',['userFactory','$http','$scope','$window',function(userFactory,$http,$scope,$window){
     $scope.total = 0;
 
-    $http.get('/testItems').then(function(success){//will be items from shopping cart
-        $scope.shoppingItems = success.data;
-
-        $scope.shoppingItems.forEach(function(item){
-            $scope.$watch(function(){
-                return item.get;
-            },function(){
-                if(item.get){
-                    $scope.total += item.price * item.quantity;
-                }else{
-                    if($scope.total > 0) $scope.total -= item.price * item.quantity;
-                }
-            });
-        });
-    });
+    $scope.shoppingItems = userFactory.getUser().orders;
 
     $scope.all = function(){
         $scope.shoppingItems.forEach(function(item){
