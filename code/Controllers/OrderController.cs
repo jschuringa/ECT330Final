@@ -83,6 +83,8 @@ namespace code.Controllers
                 return BadRequest(ModelState);
             }
 
+            order.customerID = (int)Request.Properties["id"];
+
             db.orders.Add(order);
             db.SaveChanges();
 

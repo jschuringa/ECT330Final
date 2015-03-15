@@ -11,7 +11,8 @@ snow.factory('userFactory',['$rootScope',function($rootScope){
     return {
         getAuth:getAuth,
         getUser:getUser,
-        setUser:setUser
+        setUser:setUser,
+        updateUser:updateUser
     };
 
     function getAuth(){
@@ -29,7 +30,11 @@ snow.factory('userFactory',['$rootScope',function($rootScope){
 
     function setUser(inUser){
         user = inUser;
-        localStorage.setItem('user',JSON.stringify(inUser));
+        updateUser();
         $rootScope.name = user.firstName + ' ' + user.lastName;
+    }
+
+    function updateUser(){
+        localStorage.setItem('user',JSON.stringify(user));
     }
 }]);
