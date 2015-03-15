@@ -12,7 +12,7 @@ namespace code.Models
     {
         public DBcontext() : base("name=smznDB")
         {
-
+            Database.SetInitializer<DBcontext>(new DropCreateDatabaseAlways<DBcontext>());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
