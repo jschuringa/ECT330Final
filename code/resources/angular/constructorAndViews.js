@@ -19,5 +19,8 @@ snow.config(['$routeProvider',function($routeProvider){
     }).when('/checkout',{
         templateUrl:root + '/checkout/checkout.html',
         controller:'checkoutCtrl'
+    }).when('/purchased',{
+        templateUrl:root + '/purchased/purchased.html',
+        controller:'purchasedCtrl'
     }).otherwise('/');
 }]);
