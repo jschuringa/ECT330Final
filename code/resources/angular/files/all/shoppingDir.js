@@ -1,20 +1,23 @@
 'use strict';
 
-snow.directive('shoppingDir',['$http','$rootScope',function($http,$rootScope){
+snow.directive('shoppingDir',['userFactory','$http','$rootScope',function(userFactory,$http,$rootScope){
     return {
         scope:true,
         link:function(scope){
-            scope.shoppingNum = 0;
-            refreshCount();
+            scope.shoppingNum = refreshCount();
 
             $rootScope.$on('updateCart',function(){
-                refreshCount();
+                scope.shoppingNum = refreshCount();
             });
 
             function refreshCount(){
-                $http.get('/shoppingCart').then(function(success){
-                    scope.shoppingNum = success.data.length;
-                });
+                var user = userFactory.getUser();
+
+                if(user !== null){
+                    return user.orders.length;
+                }else{
+                    return 0;
+                }
             }
         }
     };

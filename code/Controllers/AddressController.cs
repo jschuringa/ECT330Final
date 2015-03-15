@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using code.Models;
+using code.Filters;
 
 namespace code.Controllers
 {
@@ -17,14 +18,14 @@ namespace code.Controllers
         private DBcontext db = new DBcontext();
 
         // GET api/address
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IQueryable<address> Getaddresses()
         {
             return db.addresses;
         }
 
         // GET api/address/5
-        [Authorize]
+        [BasicAuthenticationFilter]
         [ResponseType(typeof(address))]
         public IHttpActionResult Getaddress(int id)
         {
@@ -38,7 +39,7 @@ namespace code.Controllers
         }
 
         // PUT api/address/5
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IHttpActionResult Putaddress(int id, address address)
         {
             if (!ModelState.IsValid)
@@ -74,13 +75,15 @@ namespace code.Controllers
 
         // POST api/address
         [ResponseType(typeof(address))]
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IHttpActionResult Postaddress(address address)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            address.customerID = (int)Request.Properties["id"];
 
             db.addresses.Add(address);
             db.SaveChanges();
@@ -90,7 +93,7 @@ namespace code.Controllers
 
         // DELETE api/address/5
         [ResponseType(typeof(address))]
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IHttpActionResult Deleteaddress(int id)
         {
             address address = db.addresses.Find(id);

@@ -3,11 +3,14 @@
 snow.controller('loginCtrl',['$http','$location','$scope','userFactory','$window',function($http,$location,$scope,userFactory,$window){
     $scope.login = function(){
         if($scope.loginForm.$valid){
-            var data = {user:$scope.user,password:$scope.password};
+            var data = 'Basic ' + window.btoa($scope.user + ':' + $scope.password);
+            var authHeader = {headers:{Authorization:data}};
 
-            $http.post('/login',data).then(function(){
+            localStorage.removeItem('user');//removes previous user on login attempt
+
+            $http.get('/api/customer',authHeader).then(function(success){
                 //successfully logged in
-                userFactory.setUser({name:'test user'});
+                userFactory.setUser(success.data);
                 $location.path('/');
             }).catch(function(err){
                 if(err.status == 404){

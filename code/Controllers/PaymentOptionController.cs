@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using code.Models;
+using code.Filters;
 
 namespace code.Controllers
 {
@@ -17,7 +18,7 @@ namespace code.Controllers
         private DBcontext db = new DBcontext();
 
         // GET api/paymentOption
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IQueryable<paymentOption> GetpaymentOptions()
         {
             return db.paymentOptions;
@@ -25,7 +26,7 @@ namespace code.Controllers
 
         // GET api/paymentOption/5
         [ResponseType(typeof(paymentOption))]
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IHttpActionResult GetpaymentOption(int id)
         {
             paymentOption paymentoption = db.paymentOptions.Find(id);
@@ -38,7 +39,7 @@ namespace code.Controllers
         }
 
         // PUT api/paymentOption/5
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IHttpActionResult PutpaymentOption(int id, paymentOption paymentoption)
         {
             if (!ModelState.IsValid)
@@ -74,13 +75,15 @@ namespace code.Controllers
 
         // POST api/paymentOption
         [ResponseType(typeof(paymentOption))]
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IHttpActionResult PostpaymentOption(paymentOption paymentoption)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            paymentoption.customerID = (int)Request.Properties["id"];
 
             db.paymentOptions.Add(paymentoption);
             db.SaveChanges();
@@ -90,7 +93,7 @@ namespace code.Controllers
 
         // DELETE api/paymentOption/5
         [ResponseType(typeof(paymentOption))]
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IHttpActionResult DeletepaymentOption(int id)
         {
             paymentOption paymentoption = db.paymentOptions.Find(id);

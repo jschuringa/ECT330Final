@@ -4,16 +4,34 @@ snow.controller('signupCtrl',['$http','$location','$scope','userFactory','$windo
     $scope.register = function(){
         if($scope.registrationForm.$valid){
             var data = {
-                fname:$scope.fname,
-                lname:$scope.lname,
-                email:$scope.email,
-                password:$scope.password,
-                phone:$scope.phone
+                firstName:$scope.fname,
+                lastName:$scope.lname,
+                username:$scope.username,
+                password:$scope.password
             };
 
-            $http.post('/users',data).then(function(){
+            $http.post('/api/customer',data).then(function(success){
+                userFactory.setUser(success.data);
+
+                data = {
+                    addressLine1:$scope.address,
+                    addressLine2:$scope.unit,
+                    city:$scope.city,
+                    state:$scope.state,
+                    zipcode:$scope.zip
+                };
+
+                return $http.post('/api/address',data);
+            }).then(function(){
+                data = {
+                    cardNumber:$scope.card.replace(/[\D]]/g,''),
+                    expDate:$scope.expDate,
+                    secCode:$scope.security
+                };
+
+                return $http.post('/api/paymentOption',data);
+            }).then(function(){
                 $window.alert('Successfully signed up!');
-                userFactory.setUser({name:'new user'});
                 $location.path('/');
             }).catch(function(err){
                 if(err.status === 404){
@@ -47,14 +65,15 @@ snow.controller('signupCtrl',['$http','$location','$scope','userFactory','$windo
         }
     });
 
-    $scope.$watch('phone',function(){
-        if($scope.phone !== undefined){
-            $scope.phone = $scope.phone.replace(/[^-0-9]/g,'');//only allows digits and '-'
+    $scope.$watch('card',function(){//card validation
+        if($scope.card !== undefined){
+            var numbers = $scope.card.replace(/[\D]/g,'');
+            $scope.card = $scope.card.replace(/[^\d-]/g,'');
 
-            if($scope.phone.length < 10){
-                $scope.registrationForm.phone.$setValidity('Bad Phone Length',false);//Done manually to allow above code to run on short entries
+            if(numbers.length > 5){
+                $scope.registrationForm.card.$setValidity('Card Length',true);
             }else{
-                $scope.registrationForm.phone.$setValidity('Bad Phone Length',true);
+                $scope.registrationForm.card.$setValidity('Card Length',false);
             }
         }
     });

@@ -1,6 +1,6 @@
 'use strict';
 
-snow.controller('landingCtrl',['$http','$scope','$window',function($http,$scope,$window){
+snow.controller('landingCtrl',['userFactory','$http','$scope','$window',function(userFactory,$http,$scope,$window){
     $scope.$on('clicked',function(event,item){
         $scope.showModal = true;
         $scope.chosen = item;
@@ -16,14 +16,25 @@ snow.controller('landingCtrl',['$http','$scope','$window',function($http,$scope,
 
     $scope.get = function(chosen){
         if($scope.num > 0){
-            $http.post('/shoppingCart',chosen).then(function(){
+            var data = {
+                itemId:$scope.chosen.itemID,
+                orderDate:new Date().toISOString().slice(0, 19).replace('T', ' '),
+                itemQTY:$scope.num
+            };
+            console.log($scope.chosen);
+
+            $http.post('/api/order',data,chosen).then(function(success){
                 //successfully added
                 $scope.close();
+                userFactory.getUser().orders.push(success.data);//add order to user object
+                userFactory.updateUser();
                 $scope.$emit('updateCart');
                 //TODO Add shopping cart functionality;
             }).catch(function(err){
                 if(err.status){
                     $window.alert('Couldn\'t reach the server. Please try again');
+                }else if(err.status === 401){
+                    $window.alert('You have to be logged in to place an order');
                 }else{
                     $window.alert('Something went wrong while trying to add item to your shopping cart. Please try again');
                 }
