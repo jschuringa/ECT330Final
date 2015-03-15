@@ -39,15 +39,20 @@ namespace code.Controllers
 
         // GET api/customer/5
         [ResponseType(typeof(customer))]
+        [BasicAuthenticationFilter]
         public IHttpActionResult Getcustomer(int id)
         {
-            customer customer = db.customers.Find(id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
+            if (id == (int)Request.Properties["id"]) {
+                customer customer = db.customers.Find(id);
+                if (customer == null) {
+                    return NotFound();
+                }
 
-            return Ok(customer);
+                return Ok(customer);
+            } else {
+                return Unauthorized();
+            }
+            
         }
 
         // PUT api/customer/5

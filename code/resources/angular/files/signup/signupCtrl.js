@@ -11,8 +11,27 @@ snow.controller('signupCtrl',['$http','$location','$scope','userFactory','$windo
             };
 
             $http.post('/api/customer',data).then(function(success){
-                $window.alert('Successfully signed up!');
                 userFactory.setUser(success.data);
+
+                data = {
+                    addressLine1:$scope.address,
+                    addressLine2:$scope.unit,
+                    city:$scope.city,
+                    state:$scope.state,
+                    zipcode:$scope.zip
+                };
+
+                return $http.post('/api/address',data);
+            }).then(function(){
+                data = {
+                    cardNumber:$scope.card.replace(/[\D]]/g,''),
+                    expDate:$scope.expDate,
+                    secCode:$scope.security
+                };
+
+                return $http.post('/api/paymentOption',data);
+            }).then(function(){
+                $window.alert('Successfully signed up!');
                 $location.path('/');
             }).catch(function(err){
                 if(err.status === 404){
@@ -42,6 +61,19 @@ snow.controller('signupCtrl',['$http','$location','$scope','userFactory','$windo
                 if($scope.password.length >= 8){
                     $scope.registrationForm.password.$setValidity('Password doesn\'t meet criteria',true);
                 }
+            }
+        }
+    });
+
+    $scope.$watch('card',function(){//card validation
+        if($scope.card !== undefined){
+            var numbers = $scope.card.replace(/[\D]/g,'');
+            $scope.card = $scope.card.replace(/[^\d-]/g,'');
+
+            if(numbers.length > 5){
+                $scope.registrationForm.card.$setValidity('Card Length',true);
+            }else{
+                $scope.registrationForm.card.$setValidity('Card Length',false);
             }
         }
     });

@@ -83,6 +83,8 @@ namespace code.Controllers
                 return BadRequest(ModelState);
             }
 
+            paymentoption.customerID = (int)Request.Properties["id"];
+
             db.paymentOptions.Add(paymentoption);
             db.SaveChanges();
 

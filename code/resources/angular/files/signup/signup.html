@@ -21,6 +21,42 @@
                 <input type="password" placeholder="CONFIRM PASSWORD" class="form-control" name="password2" ng-model="password2" ng-required="1">
             </div>
 
+            <h1>Address</h1>
+
+            <div class="form-group" ng-class="{'has-error':!registrationForm.address.$valid&&!registrationForm.address.$pristine}">
+                <input type="text" placeholder="ADDRESS" class="form-control" name="address" ng-model="address" ng-required="1">
+            </div>
+
+            <div class="form-group" ng-class="{'has-error':!registrationForm.unit.$valid&&!registrationForm.unit.$pristine}">
+                <input type="text" placeholder="UNIT NUMBER" class="form-control" name="unit" ng-model="unit">
+            </div>
+
+            <div class="form-group" ng-class="{'has-error':!registrationForm.city.$valid&&!registrationForm.city.$pristine}">
+                <input type="text" placeholder="CITY" class="form-control" name="city" ng-model="city" ng-required="1">
+            </div>
+
+            <div class="form-group" ng-class="{'has-error':!registrationForm.state.$valid&&!registrationForm.state.$pristine}">
+                <input type="text" placeholder="STATE" class="form-control" name="state" ng-model="state" ng-required="1">
+            </div>
+
+            <div class="form-group" ng-class="{'has-error':!registrationForm.zip.$valid&&!registrationForm.zip.$pristine}">
+                <input type="text" placeholder="ZIPCODE" class="form-control" name="zip" ng-minlength="5" ng-maxlength="5" ng-pattern=/^\d+$/ ng-model="zip" ng-model="zip" ng-required="1">
+            </div>
+
+            <h1>Payment Info</h1>
+
+            <div class="form-group" ng-class="{'has-error':!registrationForm.card.$valid&&!registrationForm.card.$pristine}">
+                <input type="text" placeholder="CARD NUMBER" class="form-control" name="card" ng-model="card" ng-required="1">
+            </div>
+
+            <div class="form-group" ng-class="{'has-error':!registrationForm.expDate.$valid&&!registrationForm.expDate.$pristine}">
+                <input type="text" placeholder="EXPIRATION DATE" class="form-control" name="expDate" ng-model="expDate" ng-required="1">
+            </div>
+
+            <div class="form-group" ng-class="{'has-error':!registrationForm.security.$valid&&!registrationForm.security.$pristine}">
+                <input type="text" placeholder="SECURITY CODE" class="form-control" name="security" ng-model="security" ng-required="1">
+            </div>
+
             <button type="submit" class="btn btn-success">REGISTER</button>
         </form>
     </div>

@@ -31,16 +31,6 @@ namespace code.Filters {
 
         public BasicAuthenticationFilter() { }
 
-        /// <summary>
-        /// Overriden constructor to allow explicit disabling of this
-        /// filter's behavior. Pass false to disable (same as no filter
-        /// but declarative)
-        /// </summary>
-        /// <param name="active"></param>
-        public BasicAuthenticationFilter(bool active) {
-            Active = active;
-        }
-
 
         /// <summary>
         /// Override to Web API filter method to handle Basic Auth check
@@ -76,9 +66,6 @@ namespace code.Filters {
         /// Base implementation for user authentication - you probably will
         /// want to override this method for application specific logic.
         /// 
-        /// The base implementation merely checks for username and password
-        /// present and set the Thread principal.
-        /// 
         /// Override this method if you want to customize Authentication
         /// and store user data as needed in a Thread Principle or other
         /// Request specific storage.
@@ -90,9 +77,6 @@ namespace code.Filters {
         protected virtual bool OnAuthorizeUser(string username, string password, HttpActionContext actionContext) {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return false;
-
-            Debug.WriteLine(username);
-            Debug.WriteLine(password);
 
             using (DBcontext db = new DBcontext()) {
                 var user = from u in db.customers where (u.username.Equals(username) && u.password.Equals(password)) select u;
@@ -136,8 +120,6 @@ namespace code.Filters {
         void Challenge(HttpActionContext actionContext) {
             var host = actionContext.Request.RequestUri.DnsSafeHost;
             actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized);
-            //actionContext.Response.Headers.Add("WWW-Authenticate", string.Format("Basic realm=\"{0}\"", host));
-            //actionContext.Response.StatusCode = HttpStatusCode.Unauthorized;
         }
 
     }
