@@ -27,7 +27,6 @@ snow.controller('landingCtrl',['userFactory','$http','$scope','$window',function
                 $scope.close();
                 $scope.$emit('updateCart');
                 $scope.num = 1;//reset quantity
-                //TODO Add shopping cart functionality;
             }).catch(function(err){
                 if(err.status){
                     $window.alert('Couldn\'t reach the server. Please try again');
