@@ -6,6 +6,8 @@ snow.controller('loginCtrl',['$http','$location','$scope','userFactory','$window
             var data = 'Basic ' + window.btoa($scope.user + ':' + $scope.password);
             var authHeader = {headers:{Authorization:data}};
 
+            localStorage.removeItem('user');//removes previous user on login attempt
+
             $http.get('/api/customer',authHeader).then(function(success){
                 //successfully logged in
                 userFactory.setUser(success.data);

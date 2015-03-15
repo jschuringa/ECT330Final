@@ -3,11 +3,10 @@
 snow.factory('userFactory',['$rootScope',function($rootScope){
     var user = localStorage.getItem('user');
 
-    if(user.length !== 0){
+    if(user !== null && user.length !== 0){
         user = JSON.parse(user);
+        $rootScope.name = user.firstName + ' ' + user.lastName;
     }
-
-    $rootScope.name = user.firstName + ' ' + user.lastName;
 
     return {
         getAuth:getAuth,
@@ -16,7 +15,12 @@ snow.factory('userFactory',['$rootScope',function($rootScope){
     };
 
     function getAuth(){
-        return 'Basic ' + window.btoa(user.username + ':' + user.password);
+        if(user !== null){
+            return 'Basic ' + window.btoa(user.username + ':' + user.password);
+        }else{
+            return null;
+        }
+
     }
 
     function getUser(){
