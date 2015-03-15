@@ -1,25 +1,26 @@
 'use strict';
 
 snow.factory('userFactory',['$rootScope',function($rootScope){
-    var user;
+    var user = localStorage.getItem('user');
+
+    if(user.length !== 0){
+        user = JSON.parse(user);
+    }
+
+    $rootScope.name = user.firstName + ' ' + user.lastName;
 
     return {
+        getAuth:getAuth,
         getUser:getUser,
         setUser:setUser
     };
 
+    function getAuth(){
+        return 'Basic ' + window.btoa(user.username + ':' + user.password);
+    }
+
     function getUser(){
-        if(user !== undefined){
-            return user;
-        }else{
-            user = localStorage.getItem('user');
-
-            if(user.length !== 0){
-                user = JSON.parse(user);
-            }
-
-            return user;
-        }
+        return user;
     }
 
     function setUser(inUser){

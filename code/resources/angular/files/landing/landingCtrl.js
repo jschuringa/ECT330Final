@@ -14,8 +14,6 @@ snow.controller('landingCtrl',['userFactory','$http','$scope','$window',function
         $scope.chosen = null;
     };
 
-    console.log(userFactory.getUser());
-
     $scope.get = function(chosen){
         if($scope.num > 0){
             $http.post('/shoppingCart',chosen).then(function(){
