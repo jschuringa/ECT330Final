@@ -1,28 +1,32 @@
 'use strict';
 
 snow.controller('checkoutCtrl',['userFactory','$http','$scope','$window',function(userFactory,$http,$scope,$window){
-    $scope.total = 0;
+    refreshOrders();
 
-    $scope.shoppingItems = userFactory.getUser().orders;
 
-    $scope.all = function(){
-        $scope.shoppingItems.forEach(function(item){
-            item.get = true;
-        });
-    };
-
-    $scope.none = function(){
-        $scope.shoppingItems.forEach(function(item){
-            item.get = false;
+    $scope.remove = function(item){
+        $http.delete('/api/order/' + item.orderID).then(function(){
+            $scope.$emit('updateCart');
+            refreshOrders();
         });
     };
 
     $scope.buy = function(){
-        if($scope.shoppingItems.some(function(item){return item.get})){
-            console.log('selected');
-            //TODO: Purchase item
-        }else{
-            $window.alert('Please select at least 1 item to buy');
-        }
+
+    };
+
+    function refreshOrders(){
+        userFactory.getUser().then(function(success){
+            $scope.total = 0;
+            $scope.shoppingItems = success.data.orders;
+
+            if($scope.address === undefined){//loads up shipping address, and allow them to change it
+                $scope.address = success.data.addresses[0];
+            }
+
+            $scope.shoppingItems.forEach(function(item){
+                $scope.total += item.items.itemPrice * item.itemQTY;
+            });
+        });
     }
 }]);
