@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using code.Models;
 using System.Web;
+using System.Net.Http.Headers;
 
 namespace code.Controllers
 {
@@ -18,9 +19,17 @@ namespace code.Controllers
         private DBcontext db = new DBcontext();
 
         // GET api/login
-        public IQueryable<customer> Getcustomers()
+        public HttpResponseMessage Getcustomers()
         {
-            return db.customers;
+            var resp = new HttpResponseMessage();
+
+            var cookie = new CookieHeaderValue("session-id", "12345");
+            cookie.Expires = DateTimeOffset.Now.AddDays(1);
+            cookie.Domain = Request.RequestUri.Host;
+            cookie.Path = "/";
+
+            resp.Headers.AddCookies(new CookieHeaderValue[] { cookie });
+            return resp;
         }
 
         // GET api/login/5

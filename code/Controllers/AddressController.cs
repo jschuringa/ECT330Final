@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using code.Models;
+using code.Filters;
 
 namespace code.Controllers
 {
@@ -17,7 +18,7 @@ namespace code.Controllers
         private DBcontext db = new DBcontext();
 
         // GET api/address
-        [Authorize]
+        [BasicAuthenticationFilter]
         public IQueryable<address> Getaddresses()
         {
             return db.addresses;
