@@ -12,12 +12,9 @@ snow.controller('checkoutCtrl',['userFactory','$http','$scope','$window',functio
     };
 
     $scope.buy = function(){
-        var data = {
-            AppTransId:'9000',
-            AppTransAmount:$scope.total
-        };
+        var data = '=9000;' + $scope.total;
 
-        $http.post('/api/payment',data).then(function(success){
+        $http.post('/api/payment',data,{headers:{'Content-Type':'application/x-www-form-urlencoded'}}).then(function(success){
             console.log(success.data);
             var hash = success.data;
 
@@ -28,7 +25,9 @@ snow.controller('checkoutCtrl',['userFactory','$http','$scope','$window',functio
             url = url + "&AppTransAmount=" + $scope.total;
             url = url + "&AppHash=" + hash;
 
-            window.location.href = url;//redirects the user
+            console.log(url);
+
+            //window.location.href = url;//redirects the user
         }).catch(function(err){
             if(err.status === 404){
                 $window.alert('Server is unavailable');
