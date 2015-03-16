@@ -15,19 +15,16 @@ snow.controller('checkoutCtrl',['userFactory','$http','$scope','$window',functio
         var data = '=9000;' + $scope.total;
 
         $http.post('/api/payment',data,{headers:{'Content-Type':'application/x-www-form-urlencoded'}}).then(function(success){
-            console.log(success.data);
             var hash = success.data;
 
             //Create the URL and concatenate the Query String values
             var url = "http://ectweb2.cs.depaul.edu/ECTCreditGateway/Authorize.aspx" ;
             url = url + "?AppId="+ 43;
             url = url + "&TransId=" + 9000;
-            url = url + "&AppTransAmount=" + $scope.total;
+            url = url + "&AppTransAmount=" + encodeURIComponent($scope.total);
             url = url + "&AppHash=" + hash;
 
-            console.log(url);
-
-            //window.location.href = url;//redirects the user
+            window.location.href = url;//redirects the user
         }).catch(function(err){
             if(err.status === 404){
                 $window.alert('Server is unavailable');

@@ -21,18 +21,17 @@ namespace code.Controllers {
 
         // POST api/<controller>
         public string Post([FromBody]string value) {
+           
+
             //Assign the values for the properties we need to pass to the service
             String AppId = ConfigurationManager.AppSettings["CreditAppId"];
             String SharedKey = ConfigurationManager.AppSettings["CreditAppSharedKey"];
-            String AppTransId = "20";
-            String AppTransAmount = "12.50";
+            String AppTransId = value.Substring(0,value.IndexOf(";"));
+            String AppTransAmount = value.Substring(value.IndexOf(";")+1);
 
             // Hash the values so the server can verify the values are original
-            
-
-            String hash =
-            HttpUtility.UrlEncode(CreditAuthorizationClient.GenerateClientRequestHash(SharedKey,
-            AppId, AppTransId, AppTransAmount));
+                       
+            String hash = HttpUtility.UrlEncode(CreditAuthorizationClient.GenerateClientRequestHash(SharedKey, AppId, AppTransId, AppTransAmount));
 
             return hash;
         }
