@@ -12,7 +12,17 @@ snow.controller('checkoutCtrl',['userFactory','$http','$scope','$window',functio
     };
 
     $scope.buy = function(){
+        var data = {
+            AppTransId:'9000',
+            AppTransAmount:$scope.total
+        };
 
+        $http.post('/api/payment',data).then(function(success){
+            console.log(success.data);
+        }).catch(function(err){
+            console.log('error');
+            console.log(err);
+        });
     };
 
     function refreshOrders(){
