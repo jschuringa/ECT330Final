@@ -30,8 +30,13 @@ snow.controller('checkoutCtrl',['userFactory','$http','$scope','$window',functio
 
             window.location.href = url;//redirects the user
         }).catch(function(err){
-            console.log('error');
-            console.log(err);
+            if(err.status === 404){
+                $window.alert('Server is unavailable');
+            }else if(err.status === 401){
+                $window.alert('You must be logged in');
+            }else{
+                $window.alert('Something went wrong');
+            }
         });
     };
 
