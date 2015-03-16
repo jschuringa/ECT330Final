@@ -11,6 +11,8 @@ using System.Web.Http.Description;
 using code.Models;
 using System.Web;
 using code.Filters;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace code.Controllers
 {
@@ -97,8 +99,18 @@ namespace code.Controllers
             {
                 return BadRequest(ModelState);
             }
+            customer c = customer;
+            String password = "$$$$$" + customer.password + "$#!%^";
+            var pwdBytes = Encoding.UTF8.GetBytes(password);
 
-            db.customers.Add(customer);
+            SHA256 hashAlg = new SHA256Managed();
+            hashAlg.Initialize();
+            var hashedBytes = hashAlg.ComputeHash(pwdBytes);
+            var hash = Convert.ToBase64String(hashedBytes);
+
+            c.password = hash;
+
+            db.customers.Add(c);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = customer.customerID }, customer);

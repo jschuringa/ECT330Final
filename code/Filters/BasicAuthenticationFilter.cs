@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
@@ -78,8 +79,17 @@ namespace code.Filters {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return false;
 
+
+            String hashedPass = "$$$$$" + password + "$#!%^";
+            var pwdBytes = Encoding.UTF8.GetBytes(hashedPass);
+
+            SHA256 hashAlg = new SHA256Managed();
+            hashAlg.Initialize();
+            var hashedBytes = hashAlg.ComputeHash(pwdBytes);
+            var hash = Convert.ToBase64String(hashedBytes);
+
             using (DBcontext db = new DBcontext()) {
-                var user = from u in db.customers where (u.username.Equals(username) && u.password.Equals(password)) select u;
+                var user = from u in db.customers where (u.username.Equals(username) && u.password.Equals(hash)) select u;
                 if (user.ToArray().Length != 0) {
                     actionContext.Request.Properties["id"] = user.Single().customerID;
                     return true;
